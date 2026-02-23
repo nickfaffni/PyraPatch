@@ -21,6 +21,18 @@ At each merging step, two adjacent patch tokens are concatenated and projected, 
 
 ## Setup
 
+### Using uv (Recommended)
+
+```bash
+# 1. Install dependencies
+uv sync
+
+# 2. Download datasets
+uv run download_datasets.py
+```
+
+### Using pip
+
 ```bash
 # 1. Install dependencies
 pip install -r requirements.txt
@@ -40,7 +52,8 @@ and place CSV files in `PatchTST_supervised/dataset/`.
 ### ETT / Standard Benchmark
 
 ```bash
-python run_benchmark.py
+uv run run_benchmark.py
+# or: python run_benchmark.py
 ```
 
 Runs Baseline (1 stage) vs PyraPatch (3 stages) on ETTh1, ETTh2, ETTm1, ETTm2,
@@ -49,7 +62,8 @@ Weather, Exchange-Rate — 4 prediction horizons × 3 seeds.
 ### ECL Benchmark (High-Dimensional, 321 vars)
 
 ```bash
-python run_ecl.py
+uv run run_ecl.py
+# or: python run_ecl.py
 ```
 
 > **GPU Required**: ≥12 GB VRAM. batch_size=8 is used to prevent OOM.
@@ -60,7 +74,7 @@ Runs: Baseline (d=128), BaselineLarge (d=256), PyraPatch (d=128, 3 stages) × 3 
 
 ```bash
 # Baseline
-python PatchTST_supervised/run_longExp.py \
+uv run PatchTST_supervised/run_longExp.py \
   --is_training 1 --model_id Baseline_ETTh1 --model PatchTST \
   --data ETTh1 --root_path ./PatchTST_supervised/dataset/ --data_path ETTh1.csv \
   --features M --seq_len 336 --pred_len 96 --enc_in 7 \
@@ -68,7 +82,7 @@ python PatchTST_supervised/run_longExp.py \
   --num_stages 1 --itr 1 --patience 10
 
 # PyraPatch
-python PatchTST_supervised/run_longExp.py \
+uv run PatchTST_supervised/run_longExp.py \
   --is_training 1 --model_id PyraPatch_ETTh1 --model PatchTST \
   --data ETTh1 --root_path ./PatchTST_supervised/dataset/ --data_path ETTh1.csv \
   --features M --seq_len 336 --pred_len 96 --enc_in 7 \
