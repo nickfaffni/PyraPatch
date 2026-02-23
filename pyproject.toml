@@ -1,0 +1,16 @@
+[project]
+name = "pyrapatch"
+version = "0.1.0"
+description = "Hierarchical Patch Merging for Long-Term Time Series Forecasting"
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=1.11.0",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "gdown",
+]
+
+[tool.uv]
+dev-dependencies = []
